@@ -1,6 +1,5 @@
 # coding=utf-8
 import vk
-import requests
 import time
 import random
 import os
@@ -34,11 +33,11 @@ try:
     target_info = api.users.get(user_ids=target, fields="sex")[0]
 except vk.exceptions.VkAPIError as e:
     time.sleep(1)
-    print(">>>>>Captcha sid is {}".format(e.captcha_sid))
-    response = requests.get("https://api.vk.com/method/api.users.get?user_ids" +
-                            "={}&fields=sex&access_token={}&v=5.56".format(target, access_token)).content
-    print(response)
-    raise
+    sid = e.captcha_sid
+    img = e.captcha_img
+    print("Captcha img available at {}".format(img))
+    time.sleep(60)
+    target_info = api.users.get(user_ids=target, fields="sex", captcha_key=os.environ["captcha"], captcha_sid=sid)[0]
 target_name = target_info["first_name"] + " " + target_info["last_name"]
 target_gender = target_info["sex"] == 1
 print(target_info)
