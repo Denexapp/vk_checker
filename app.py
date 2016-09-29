@@ -29,10 +29,11 @@ session = vk.Session(access_token=os.environ["access_token"])
 api = vk.API(session)
 try:
     target_info = api.users.get(user_ids=target, fields="sex")[0]
-except Exception as e:
+except vk.exceptions.VkAPIError as e:
     print("Handling an exception")
     print("Type of exception is {}".format(type(e)))
-    print(e)
+    print(e.error['captcha_img'])
+    print(e.error['captcha_sid'])
     print(e.args)
     print("Handling is over")
     raise
