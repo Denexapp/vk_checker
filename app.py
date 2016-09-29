@@ -34,7 +34,7 @@ try:
 except vk.exceptions.VkAPIError:
     time.sleep(1)
     response = requests.get("https://api.vk.com/method/api.users.get?user_ids" +
-                            "={}&fields=\"sex\"&access_token=\"{}\"&v=5.56".format(target, access_token)).content
+                            "={}&fields=sex&access_token={}&v=5.56".format(target, access_token)).content
     print(response)
     raise
 target_name = target_info["first_name"] + " " + target_info["last_name"]
