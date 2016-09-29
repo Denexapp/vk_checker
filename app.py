@@ -26,7 +26,6 @@ target = os.environ['target']
 listener = os.environ['listener']
 target = "id" + str(target)
 access_token = os.environ["access_token"]
-# your login and password, also requires app_id
 session = vk.Session(access_token=access_token)
 api = vk.API(session)
 target_info = None
@@ -44,6 +43,7 @@ except vk.exceptions.VkAPIError as e:
 target_name = target_info["first_name"] + " " + target_info["last_name"]
 target_gender = target_info["sex"] == 1
 print(target_info)
+time.sleep(5)
 old_status = None
 while True:
     status = get_status(target)
