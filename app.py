@@ -29,14 +29,20 @@ access_token = os.environ["access_token"]
 # your login and password, also requires app_id
 session = vk.Session(access_token=access_token)
 api = vk.API(session)
-try:
-    target_info = api.users.get(user_ids=target, fields="sex")[0]
-except vk.exceptions.VkAPIError:
-    time.sleep(1)
-    response = requests.get("https://api.vk.com/method/api.users.get?user_ids" +
-                            "={}&fields=sex&access_token={}&v=5.56".format(target, access_token)).content
+response = requests.get("https://api.vk.com/method/api.users.get?user_ids" +
+                        "={}&fields=sex&access_token={}&v=5.56".format(target, access_token)).content
+if response["error"] is not None:
     print(response)
-    raise
+    raise Exception
+# try:
+#     target_info = api.users.get(user_ids=target, fields="sex")[0]
+# except vk.exceptions.VkAPIError:
+#     time.sleep(1)
+#     response = requests.get("https://api.vk.com/method/api.users.get?user_ids" +
+#                             "={}&fields=sex&access_token={}&v=5.56".format(target, access_token)).content
+#     print(response)
+#     raise
+target_info = response[0]
 target_name = target_info["first_name"] + " " + target_info["last_name"]
 target_gender = target_info["sex"] == 1
 print(target_info)
