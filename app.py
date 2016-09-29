@@ -25,21 +25,15 @@ target = os.environ['target']
 listener = os.environ['listener']
 target = "id" + str(target)
 # your login and password, also requires app_id
-print("authorization in progress, app_id is {}, login is {}, password is {}".format(os.environ['app_id'],
-                                                                                    os.environ['login'],
-                                                                                    os.environ['password']))
 try:
-    session = vk.AuthSession(app_id=os.environ['app_id'],
-                             user_login=os.environ['login'],
-                             user_password=os.environ['password'],
-                             scope=4096)
+    session = vk.Session(access_token=os.environ["access_token"])
 except Exception as e:
     print(e, e.args)
     raise
 print("authorization completed")
 api = vk.API(session)
 target_info = api.users.get(user_ids=target, fields="sex")[0]
-target_name = target_info["first_name"] + " "+ target_info["last_name"]
+target_name = target_info["first_name"] + " " + target_info["last_name"]
 target_gender = target_info["sex"] == 1
 print(target_info)
 old_status = None
