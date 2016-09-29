@@ -3,7 +3,7 @@ import vk
 import time
 import random
 import os
-
+import requests
 
 def get_status(target):
     response = api.users.get(user_ids=target, fields="status")[0]
@@ -37,7 +37,9 @@ except vk.exceptions.VkAPIError as e:
     img = e.captcha_img
     print("Captcha img available at {}".format(img))
     time.sleep(60)
-    target_info = api.users.get(user_ids=target, fields="sex", captcha_key=os.environ["captcha"], captcha_sid=sid)[0]
+    key = requests.get(os.environ["captcha_solution_url"]).content
+    print("Captcha key is {}".format(key))
+    target_info = api.users.get(user_ids=target, fields="sex", captcha_key=key, captcha_sid=sid)[0]
 target_name = target_info["first_name"] + " " + target_info["last_name"]
 target_gender = target_info["sex"] == 1
 print(target_info)
