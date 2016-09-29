@@ -43,11 +43,14 @@ except vk.exceptions.VkAPIError as e:
 target_name = target_info["first_name"] + " " + target_info["last_name"]
 target_gender = target_info["sex"] == 1
 print(target_info)
-time.sleep(5)
+time.sleep(3)
 old_status = None
 while True:
     status = get_status(target)
     if status != old_status:
         old_status = status
+        time.sleep(3)
         send_message("{} изменил{} свой статус на \"{}\"".format(target_name, "а" if target_gender else "", status), listener)
-    time.sleep(10)
+        time.sleep(7)
+    else:
+        time.sleep(10)
