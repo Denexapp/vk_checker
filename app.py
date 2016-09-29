@@ -19,8 +19,10 @@ def handle_captcha(function, *args, **kwargs):
 
 
 def get_status(target):
-    response = handle_captcha(api.users.get, user_ids=target, fields="status")[0]
-    return response["status"]
+    try:
+        return handle_captcha(api.users.get, user_ids=target, fields="status")[0]["status"]
+    except requests.exceptions.ReadTimeout:
+        return old_status
 
 
 def send_message(message, target):
