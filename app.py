@@ -30,10 +30,9 @@ access_token = os.environ["access_token"]
 session = vk.Session(access_token=access_token)
 api = vk.API(session)
 response = requests.get("https://api.vk.com/method/api.users.get?user_ids" +
-                        "={}&fields=sex&access_token={}&v=5.56".format(target, access_token)).content[0]
-if response["error"] is not None:
-    print(response)
-    raise Exception
+                        "={}&fields=sex&access_token={}&v=5.56".format(target, access_token)).content
+print(response)
+raise Exception
 # try:
 #     target_info = api.users.get(user_ids=target, fields="sex")[0]
 # except vk.exceptions.VkAPIError:
