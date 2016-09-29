@@ -5,6 +5,7 @@ import random
 import os
 import requests
 
+
 def get_status(target):
     response = api.users.get(user_ids=target, fields="status")[0]
     return response["status"]
