@@ -29,13 +29,16 @@ access_token = os.environ["access_token"]
 # your login and password, also requires app_id
 session = vk.Session(access_token=access_token)
 api = vk.API(session)
+target_info = None
 try:
-    response = session.send_api_request("api.users.get?user_ids" +
-                        "={}&fields=sex&access_token={}&v=5.56".format(target, access_token))
-except vk.exceptions.VkAPIError:
-    print("thats bad")
+    target_info = api.users.get(user_ids=target, fields="sex")[0]
+except vk.exceptions.VkAPIError as e:
+    time.sleep(1)
+    print(">>>>>Captcha sid is {}".format(e.captcha_sid))
+    response = requests.get("https://api.vk.com/method/api.users.get?user_ids" +
+                            "={}&fields=sex&access_token={}&v=5.56".format(target, access_token)).content
+    print(response)
     raise
-target_info = response[0]
 target_name = target_info["first_name"] + " " + target_info["last_name"]
 target_gender = target_info["sex"] == 1
 print(target_info)
