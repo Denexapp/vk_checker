@@ -25,14 +25,17 @@ target = os.environ['target']
 listener = os.environ['listener']
 target = "id" + str(target)
 # your login and password, also requires app_id
-try:
-    session = vk.Session(access_token=os.environ["access_token"])
-except Exception as e:
-    print(e, e.args)
-    raise
-print("authorization completed")
+session = vk.Session(access_token=os.environ["access_token"])
 api = vk.API(session)
-target_info = api.users.get(user_ids=target, fields="sex")[0]
+try:
+    target_info = api.users.get(user_ids=target, fields="sex")[0]
+except Exception as e:
+    print("Handling an exception")
+    print("Type of exception is {}".format(type(e)))
+    print(e)
+    print(e.args)
+    print("Handling is over")
+    raise
 target_name = target_info["first_name"] + " " + target_info["last_name"]
 target_gender = target_info["sex"] == 1
 print(target_info)
