@@ -40,8 +40,8 @@ Vk checker module notifies you about changing status of a person in vk.com socia
 
 ## Questions:
 ### Should i use cloud?
-    The script was designed for this purposes, clouds give opportunity to run script 24/7, not like on your pc.
-    But if you want to, feel free to rewrite script to launch it on your own pc.
+The script was designed for this purposes, clouds give opportunity to run script 24/7, not like on your pc.
+But if you want to, feel free to rewrite script to launch it on your own pc, it requires python module named vk.
 
 ### Any troubles?
-    Just ask me any way you want
+Just ask me any way you want
