@@ -11,22 +11,22 @@ Vk checker module notifies you about changing status of a person in vk.com socia
 * Create a new standalone app at vk.com/dev
 * Generate access_token:
     * Take the following link, Replace YOUR_APP_ID by your actual app id from vk.com/dev and then open it in your browser.
-    'https://oauth.vk.com/authorize?client_id=YOUR_APP_ID&scope=messages,offline&redirect_uri=http://api.vk.com/blank.html&display=page&response_type=token'
+    `https://oauth.vk.com/authorize?client_id=YOUR_APP_ID&scope=messages,offline&redirect_uri=http://api.vk.com/blank.html&display=page&response_type=token`
     * Grant access by pressing blue button, blank page with text "Do not copy address" should appear.
     * Extract access_token and keep it for a while. DO NOT SEND IT ANYONE.
 * Create new paste at Pastebin with your account and remember the link to raw paste data.
-* In Heroku create new python app, and deploy vk_checker, [more info]: https://devcenter.heroku.com/categories/deployment
+* In Heroku create new python app, and deploy vk_checker, more info: https://devcenter.heroku.com/categories/deployment
 * Add config vars:
     * Go to Settings > Config Variables > Reveal config vars
     * Add following vars:
-        * 'access_token' = access_token_you_get_before
-        * 'app_id' = your_app_id
-        * 'listener' = id_of_person_who_will_be_receiving_notification
-            numbers only, for example 'listener' = '12345'
-        * 'target' = id_of_person_to_watch_status
-            this should be in same format as 'listener'
-        * 'captcha_solution_url' = url_to_paste_raw_data
-            for example 'captcha_solution_url' = 'http://pastebin.com/raw/abcde'
+        * `access_token` = access_token_you_get_before
+        * `app_id` = your_app_id
+        * `listener` = id_of_person_who_will_be_receiving_notification
+        numbers only, for example `listener` = `12345`
+        * `target` = id_of_person_to_watch_status
+        this should be in same format as `listener`
+        * `captcha_solution_url` = url_to_paste_raw_data
+        for example `captcha_solution_url` = `http://pastebin.com/raw/abcde`
 * Running:
     * In Heroku open your app logs(in top right corner click More > View logs)
     * Open your paste at Pastebin and click edit
